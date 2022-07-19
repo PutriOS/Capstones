@@ -32,3 +32,10 @@ Feature: Logout User Endpoint
     When I send refresh endpoint
     Then I received HTTP response 200
     And I validate response
+
+  @Forgotpassword
+  Scenario: forgot password
+    Given I get find email
+    When I send request forgot password
+    Then I received HTTP response 200
+    And I validate response forgot password

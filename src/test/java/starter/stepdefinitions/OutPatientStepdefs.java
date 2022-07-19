@@ -4,10 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import starter.Outpatient.Create;
-import starter.Outpatient.ListGetID;
-import starter.Outpatient.LogReport;
-import starter.Outpatient.Report;
+import starter.Outpatient.*;
 
 public class OutPatientStepdefs {
     @Steps
@@ -22,29 +19,28 @@ public class OutPatientStepdefs {
     @Steps
     LogReport logReport;
 
+    @Steps
+    ListAll listAll;
+
+    //Create
     @Given("I success login as admin")
     public void iSuccessLoginAsAdmin() {
         create.iSuccessloginAsAdmin();
     }
 
-    @When("I send request create data outpatient endpoint")
-    public void iSendRequestCreateDataOutPatientEndpoint() {
-        create.iSendEndpointCreateOutPatient();
+    @When("I send {string}, and {string}, and {int}, and {string}, and {int} and {string}")
+    public void iSendAndAndFacility_idAndAndSession_idAnd(String patientCode, String doctorCode, int facilityId, String complaint, int sessionId, String dateCheck) {
+        create.requestPostCreateOutpatient(patientCode,doctorCode,facilityId,complaint,sessionId,dateCheck);
     }
 
-    @And("I validate response message create Outpatient")
-    public void iValidateResponseMessageCreateOutpatient() {
-        create.validateResponseMessageCreateOutpatient();
+    @And("I validate response {string} message create Outpatient")
+    public void iValidateResponseMessageCreateOutpatient(String responses) {
+        create.validateMessageCreateOutpatient(responses);
     }
 
     @When("I send get ID endpoint")
     public void iSendGetIDEndpoint() {
         getID.iSendOutPatientEndpoint();
-    }
-
-    @And("I validate data OutPatient")
-    public void iValidateDataOutPatient() {
-        getID.validateResponseMessage();
     }
 
     //Get Report
@@ -53,24 +49,14 @@ public class OutPatientStepdefs {
         report.iSendReportOutPatientEndpoint();
     }
 
-    @And("I validate report OutPatient data")
-    public void iValidateReportOutPatientData() {
-        report.validateResponseMessage();
-    }
-
     //Get LogReport
     @When("I send request get logReport endpoint")
     public void iSendRequestGetLogReportEndpoint() {
         logReport.iSendOutPatientEndpoint();
     }
 
-    @And("I validate logreport OutPatient data")
-    public void iValidateLogreportOutPatientData() {
-        logReport.validateResponseMessage();
+    @When("I send request get list All endpoint")
+    public void iSendRequestGetListAllEndpoint() {
+        listAll.iSendListAllOutPatientEndpoint();
     }
-
-//    @When("I send request {int} and {int} and {int} and {int} and {string}")
-//    public void iSendRequestPatient_idAndMedical_staffAndMedical_facility_idAndSession_idAnd( int patient_id, int medical_staff, int medical_facility_id, int session_id, String date) {
-//    }
-
 }

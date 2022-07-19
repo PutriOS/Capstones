@@ -4,25 +4,23 @@ import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 
 import static org.hamcrest.Matchers.equalTo;
+import static starter.Autentikasi.RefreshToken.tokens;
 import static starter.Outpatient.Create.token;
 
-public class Delete {
+public class ListByFacility {
     protected String baseUrl = "https://go-hospital-server.herokuapp.com/";
 
-    @Step("I set delete endpoint for outpatient")
-    public String iSetDeleteUserEndpoint(){
-        return baseUrl+"api/user/"+5+"/delete";
-    }
 
-    @Step("I send user endpoint")
-    public void iSendDeleteUserEndpoint(){
+    @Step("I send get id user endpoint")
+    public void iSendGetListByFacilityEndpoint(){
         SerenityRest.given()
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + token)
-                .when().delete(iSetDeleteUserEndpoint());
+                .when().get(baseUrl+"api/user?facility_id=" + 1);
     }
 
-    public void validateUserErrorResponseMessage(){
-        SerenityRest.then().body("error", equalTo("No Record Found"));
+    @Step("i validate user response message")
+    public void validateUserResponseMessage(){
+        SerenityRest.then().body("data[0].email", equalTo("alsyadahmad@holyhos.co.id"));
     }
 }

@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import starter.Autentikasi.ForgotPass;
 import starter.Autentikasi.Login;
 import starter.Autentikasi.Logout;
 import starter.Autentikasi.RefreshToken;
@@ -18,6 +19,9 @@ public class AutentikasiStepdefs {
 
     @Steps
     RefreshToken refreshToken;
+
+    @Steps
+    ForgotPass forgotpass;
 
     @Given("I set an endpoint for login")
     public void iSetAnEndpointForLogin() {
@@ -71,5 +75,20 @@ public class AutentikasiStepdefs {
     @And("I validate response")
     public void iValidateResponse() {
         refreshToken.validateResponse();
+    }
+
+    @Given("I get find email")
+    public void iGetFindEmail() {
+        forgotpass.iGetFindEmail();
+    }
+
+    @When("I send request forgot password")
+    public void iSendRequestForgotPassword() {
+        forgotpass.iSendForgotPasswordEndpoint();
+    }
+
+    @And("I validate response forgot password")
+    public void iValidateResponseForgotPassword() {
+        forgotpass.validateResponse();
     }
 }

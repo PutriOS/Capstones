@@ -4,10 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
-import starter.User.Create;
-import starter.User.GetAll;
-import starter.User.ListByID;
-import starter.User.Update;
+import starter.User.*;
 
 public class UserStepdefs {
     @Steps
@@ -21,6 +18,15 @@ public class UserStepdefs {
 
     @Steps
     Update update;
+
+    @Steps
+    Delete delete;
+
+    @Steps
+    ListByFacility listByFacility;
+
+    @Steps
+    ListByRole listByRole;
 
 
     //CREATE
@@ -61,6 +67,7 @@ public class UserStepdefs {
         listByID.validateUserResponseMessage();
     }
 
+    //Update
     @And("I success create user")
     public void iSuccessCreateUser() {
         update.CreatedUser();
@@ -76,26 +83,34 @@ public class UserStepdefs {
         update.validateUpdateResponseMessage();
     }
 
-//    //Update
-//    @When("I send request update create data user")
-//    public void iSendRequestUpdateCreateDataUser() {
-//        updated.UpdateUser();
-//    }
-//
-//    @And("I validate response message update user")
-//    public void iValidateResponseMessageUpdateUser() {
-//        updated.validateUpdateResponseMessage();
-//    }
+    //Delete
+    @When("I send request delete data user")
+    public void iSendRequestDeleteDataUser() {
+        delete.iSendDeleteUserEndpoint();
+    }
 
-//    //Delete
-//    @When("I send request delete data user")
-//    public void iSendRequestDeleteDataUser() {
-//        delete.iSendDeleteUserEndpoint();
-//    }
-//
-//    @And("I validate response message delete user")
-//    public void iValidateResponseMessageDeleteUser() {
-//        delete.validateUserResponseMessage();
-//    }
+    @Then("I validate response message delete user")
+    public void iValidateResponseMessageDeleteUser() {
+        delete.validateUserErrorResponseMessage();
+    }
 
+    @When("I send request get list by role")
+    public void iSendRequestGetListByRole() {
+        listByRole.iSendGetListByFacilityEndpoint();
+    }
+
+    @Then("I validate response message role")
+    public void iValidateResponseMessageRole() {
+        listByRole.validateUserResponseMessage();
+    }
+
+    @When("I send request get list by facility")
+    public void iSendRequestGetListByFacility() {
+        listByFacility.iSendGetListByFacilityEndpoint();
+    }
+
+    @Then("I validate response message facility")
+    public void iValidateResponseMessageFacility() {
+        listByFacility.validateUserResponseMessage();
+    }
 }

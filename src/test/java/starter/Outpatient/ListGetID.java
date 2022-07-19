@@ -20,9 +20,4 @@ public class ListGetID {
                 .header("Authorization", "Bearer " + token)
                 .when().get(iSetEndpointGetIdOutPatient());
     }
-
-    @Step("i validate response message")
-    public void validateResponseMessage(){
-        SerenityRest.then().body("data[0].full_name", equalTo("Faizur Ramadhan"));
-    }
 }

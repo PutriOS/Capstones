@@ -32,9 +32,29 @@ Feature: User Endpoint
     And I validate get id user data
 
   @UpdateUser
-  Scenario: Create data user
+  Scenario: Update data user
     Given I success login as admin
     And I success create user
     When I send request update create data user
     Then I received HTTP response 200
     And I validate response message update user
+
+  @DeleteUser
+  Scenario: Delete data user
+    Given I success login as admin
+    When I send request delete data user
+    Then I validate response message delete user
+
+  @ListRole
+  Scenario: Get list By role
+    Given I success login as admin
+    When I send request get list by role
+    Then I validate response message role
+
+  @ListFacility
+  Scenario: Get list By facility
+    Given I success login as admin
+    When I send request get list by facility
+    Then I validate response message facility
+
+

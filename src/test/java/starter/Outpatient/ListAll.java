@@ -6,21 +6,20 @@ import net.thucydides.core.annotations.Step;
 import static org.hamcrest.Matchers.equalTo;
 import static starter.Autentikasi.RefreshToken.tokens;
 
-public class LogReport {
+public class ListAll {
     protected String baseUrl = "https://go-hospital-server.herokuapp.com/";
 
-    @Step("I set endpoint for logReport outpatient")
-    public String iSetEndpointLogReportOutPatient(){
-        return baseUrl+"api/outpatient/log";
+    @Step("I set endpoint for list all outpatient")
+    public String iSetEndpointListAllOutPatient(){
+        return baseUrl+"api/outpatient";
     }
 
-    @Step("I send logout endpoint")
-    public void iSendOutPatientEndpoint(){
+    @Step("I send list all out patient endpoint")
+
+    public void iSendListAllOutPatientEndpoint(){
         SerenityRest.given()
                 .header("Authorization", "Bearer " + tokens)
-                .when().get(iSetEndpointLogReportOutPatient());
+                .header("Content-Type", "application/json")
+                .when().get(iSetEndpointListAllOutPatient());
     }
 }
-
-
-
